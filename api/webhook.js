@@ -14,17 +14,8 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     try {
-      // En Vercel el body puede llegar vacío, así que lo leemos manualmente
-      const buffers = [];
-      for await (const chunk of req) {
-        buffers.push(chunk);
-      }
-      const data = Buffer.concat(buffers).toString();
-      const jsonBody = data ? JSON.parse(data) : {};
-
-      console.log("Webhook recibido:", JSON.stringify(jsonBody, null, 2));
-
-      return res.sendStatus(200);
+      console.log("Webhook recibido (POST)"); // No procesamos el body aún
+      return res.status(200).json({ status: "ok" });
     } catch (error) {
       console.error("Error procesando webhook:", error);
       return res.sendStatus(500);
