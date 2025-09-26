@@ -1,20 +1,14 @@
-import { URL } from "url";
+export default async function handler(req, res) {
+  try {
+    console.log("Método:", req.method);
+    console.log("Headers:", req.headers);
 
-export default function handler(req, res) {
-  if (req.method === "GET") {
-    const VERIFY_TOKEN = "tu_token_secreto"; // cámbialo por el tuyo
+    // En Vercel, a veces el body se parsea en req.body automáticamente
+    console.log("Body:", req.body);
 
-    const url = new URL(req.url, `http://${req.headers.host}`);
-    const mode = url.searchParams.get("hub.mode");
-    const token = url.searchParams.get("hub.verify_token");
-    const challenge = url.searchParams.get("hub.challenge");
-
-    if (mode && token && mode === "subscribe" && token === VERIFY_TOKEN) {
-      return res.status(200).send(challenge);
-    } else {
-      return res.sendStatus(403);
-    }
+    return res.status(200).json({ ok: true, method: req.method });
+  } catch (error) {
+    console.error("Error en handler:", error);
+    return res.status(500).json({ error: "Crash en webhook" });
   }
-
-  return res.status(200).json({ ok: true, method: req.method });
 }
