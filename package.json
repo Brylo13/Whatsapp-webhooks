@@ -1,0 +1,9 @@
+{
+  "name": "whatsapp-webhooks",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "vercel dev"
+  }
+}
+
