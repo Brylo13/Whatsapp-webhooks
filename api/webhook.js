@@ -1,13 +1,13 @@
 export default function handler(req, res) {
   if (req.method === "GET") {
-    const verifyToken = "TU_TOKEN_AQUI";
+    const VERIFY_TOKEN = process.env.VERIFY_TOKEN; // 👈 viene de Vercel
 
     const mode = req.query["hub.mode"];
     const token = req.query["hub.verify_token"];
     const challenge = req.query["hub.challenge"];
 
     if (mode && token) {
-      if (mode === "subscribe" && token === verifyToken) {
+      if (mode === "subscribe" && token === VERIFY_TOKEN) {
         res.statusCode = 200;
         res.end(challenge);
       } else {
