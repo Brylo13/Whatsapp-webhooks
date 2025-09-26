@@ -1,9 +1,13 @@
 {
   "name": "whatsapp-webhooks",
   "version": "1.0.0",
-  "private": true,
+  "description": "Proyecto para manejar webhooks de WhatsApp",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "vercel dev"
-  }
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
 }
-
